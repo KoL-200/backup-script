@@ -23,4 +23,5 @@ done
 
 mkdir -p "$HOME/storage/shared/Backups"
 cp "$DEST"/*-"$STAMP".tar.gz "$HOME/storage/shared/Backups/"
+for DIR in "${SOURCES[@]}"; do N=$(basename "$DIR"); ls -t "$HOME/storage/shared/Backups/$N"-*.tar.gz | tail -n +$((KEEP + 1)) | xargs -r rm --; done
 termux-notification --title "Backup done" --content "Backed up ${#SOURCES[@]} projects"
